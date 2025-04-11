@@ -1,0 +1,88 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{29A301F3-D781-4D6F-81F0-03C28AF7BA2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{95409D6E-E0DA-4CF7-874E-B60F893FDA4F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{5F6B4FBC-5AE0-43F4-B85A-BA98CA129765}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{D97A3647-D5D5-4937-91BF-8C7FE0AF82DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{7DDA54BD-5BF8-4054-A0DB-EF787A5885E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Server", "Vasis.Erp.Facil.Server\Vasis.Erp.Facil.Server.csproj", "{DA0D1C47-11F4-479C-8FB4-03CA08619ACE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Assembly", "Vasis.Erp.Facil.Assembly\Vasis.Erp.Facil.Assembly\Vasis.Erp.Facil.Assembly.csproj", "{191681C5-ABA5-40C6-8438-D6804AC9E4B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Assembly.Client", "Vasis.Erp.Facil.Assembly\Vasis.Erp.Facil.Assembly.Client\Vasis.Erp.Facil.Assembly.Client.csproj", "{F82161E8-3FE4-4805-BCCE-89934E723292}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Data", "Vasis.Erp.Facil.Data\Vasis.Erp.Facil.Data.csproj", "{483C71AF-783B-428E-83B3-9C4A79291ED0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Services", "Vasis.Erp.Facil.Services\Vasis.Erp.Facil.Services.csproj", "{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Integracoes.ZeusMdfe", "Vasis.Erp.Facil.Integracoes.ZeusMdfe\Vasis.Erp.Facil.Integracoes.ZeusMdfe.csproj", "{28B61A55-AEEC-4372-86E1-C81A89FC8AD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Shared", "Vasis.Erp.Facil.Shared\Vasis.Erp.Facil.Shared.csproj", "{E73E40ED-2429-4616-8C0D-B4C56F5C7A2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Tests", "Vasis.Erp.Facil.Tests\Vasis.Erp.Facil.Tests.csproj", "{49720E78-2136-4424-956B-47322AF0241D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA0D1C47-11F4-479C-8FB4-03CA08619ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0D1C47-11F4-479C-8FB4-03CA08619ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0D1C47-11F4-479C-8FB4-03CA08619ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0D1C47-11F4-479C-8FB4-03CA08619ACE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{191681C5-ABA5-40C6-8438-D6804AC9E4B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191681C5-ABA5-40C6-8438-D6804AC9E4B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191681C5-ABA5-40C6-8438-D6804AC9E4B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191681C5-ABA5-40C6-8438-D6804AC9E4B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F82161E8-3FE4-4805-BCCE-89934E723292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82161E8-3FE4-4805-BCCE-89934E723292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F82161E8-3FE4-4805-BCCE-89934E723292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F82161E8-3FE4-4805-BCCE-89934E723292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{483C71AF-783B-428E-83B3-9C4A79291ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{483C71AF-783B-428E-83B3-9C4A79291ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{483C71AF-783B-428E-83B3-9C4A79291ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{483C71AF-783B-428E-83B3-9C4A79291ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B61A55-AEEC-4372-86E1-C81A89FC8AD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B61A55-AEEC-4372-86E1-C81A89FC8AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B61A55-AEEC-4372-86E1-C81A89FC8AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B61A55-AEEC-4372-86E1-C81A89FC8AD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E73E40ED-2429-4616-8C0D-B4C56F5C7A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E73E40ED-2429-4616-8C0D-B4C56F5C7A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E73E40ED-2429-4616-8C0D-B4C56F5C7A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E73E40ED-2429-4616-8C0D-B4C56F5C7A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49720E78-2136-4424-956B-47322AF0241D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49720E78-2136-4424-956B-47322AF0241D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49720E78-2136-4424-956B-47322AF0241D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49720E78-2136-4424-956B-47322AF0241D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DA0D1C47-11F4-479C-8FB4-03CA08619ACE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{191681C5-ABA5-40C6-8438-D6804AC9E4B1} = {29A301F3-D781-4D6F-81F0-03C28AF7BA2B}
+		{F82161E8-3FE4-4805-BCCE-89934E723292} = {29A301F3-D781-4D6F-81F0-03C28AF7BA2B}
+		{483C71AF-783B-428E-83B3-9C4A79291ED0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{28B61A55-AEEC-4372-86E1-C81A89FC8AD3} = {5F6B4FBC-5AE0-43F4-B85A-BA98CA129765}
+		{E73E40ED-2429-4616-8C0D-B4C56F5C7A2D} = {95409D6E-E0DA-4CF7-874E-B60F893FDA4F}
+		{49720E78-2136-4424-956B-47322AF0241D} = {D97A3647-D5D5-4937-91BF-8C7FE0AF82DC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49D8D1F7-6DFD-45AA-8701-3DE45CA8E07B}
+	EndGlobalSection
+EndGlobal
