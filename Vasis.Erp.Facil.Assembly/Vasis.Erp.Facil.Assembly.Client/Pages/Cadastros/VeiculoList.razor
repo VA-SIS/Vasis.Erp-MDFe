@@ -1,0 +1,48 @@
+﻿@page "/cadastros/veiculos"
+@using Vasis.Erp.Facil.Shared.Entities.Cadastros
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<MudPaper Class="p-4">
+    <MudText Typo="Typo.h5">Veículos</MudText>
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Novo" Class="mb-2">
+        Novo Veículo
+    </MudButton>
+
+    <MudTable Items="_lista" Hover="true">
+        <HeaderContent>
+            <MudTh>Placa</MudTh>
+            <MudTh>Modelo</MudTh>
+            <MudTh>Marca</MudTh>
+            <MudTh>Ações</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Placa">@context.Placa</MudTd>
+            <MudTd DataLabel="Modelo">@context.Modelo</MudTd>
+            <MudTd DataLabel="Marca">@context.Marca</MudTd>
+            <MudTd>
+                <MudIconButton Icon="Edit" Color="Color.Primary" OnClick="@(() => Editar(context.Id))" />
+                <MudIconButton Icon="Delete" Color="Color.Error" OnClick="@(() => Excluir(context.Id))" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudPaper>
+
+@code {
+    private List<Veiculo> _lista = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        _lista = await Http.GetFromJsonAsync<List<Veiculo>>("api/veiculo") ?? [];
+    }
+
+    void Novo() => Navigation.NavigateTo("/cadastros/veiculos/novo");
+    void Editar(Guid id) => Navigation.NavigateTo($"/cadastros/veiculos/{id}");
+
+    async Task Excluir(Guid id)
+    {
+        await Http.DeleteAsync($"api/veiculo/{id}");
+        _lista = await Http.GetFromJsonAsync<List<Veiculo>>("api/veiculo") ?? [];
+    }
+}

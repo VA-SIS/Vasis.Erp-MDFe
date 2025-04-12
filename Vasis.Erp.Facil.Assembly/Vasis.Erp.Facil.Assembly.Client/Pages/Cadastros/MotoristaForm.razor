@@ -1,0 +1,47 @@
+﻿@page "/cadastros/motoristas/novo"
+@page "/cadastros/motoristas/{Id:guid}"
+@using Vasis.Erp.Facil.Shared.Entities.Cadastros
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<MudPaper Class="p-4">
+    <MudText Typo="Typo.h5">@(_isNovo ? "Novo Motorista" : "Editar Motorista")</MudText>
+
+    <EditForm Model="_motorista" OnValidSubmit="Salvar">
+        <MudTextField T="string" Label="Nome" @bind-Value="_motorista.Nome" Required="true" />
+        <MudTextField Label="CPF" @bind-Value="_motorista.Cpf" />
+        <MudTextField Label="CNH" @bind-Value="_motorista.Cnh" />
+        <MudTextField Label="Categoria CNH" @bind-Value="_motorista.CategoriaCnh" />
+        <MudDatePicker Label="Validade CNH" @bind-Date="_motorista.ValidadeCnh" />
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Type="Submit" Class="mt-2">Salvar</MudButton>
+        <MudButton Variant="Variant.Outlined" OnClick="Cancelar" Class="mt-2 ml-2">Cancelar</MudButton>
+    </EditForm>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid? Id { get; set; }
+    private Motorista _motorista = new();
+    private bool _isNovo => !Id.HasValue;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!_isNovo)
+        {
+            var obj = await Http.GetFromJsonAsync<Motorista>($"api/motorista/{Id}");
+            if (obj is not null) _motorista = obj;
+        }
+    }
+
+    private async Task Salvar()
+    {
+        if (_isNovo)
+            await Http.PostAsJsonAsync("api/motorista", _motorista);
+        else
+            await Http.PutAsJsonAsync($"api/motorista/{_motorista.Id}", _motorista);
+
+        Navigation.NavigateTo("/cadastros/motoristas");
+    }
+
+    void Cancelar() => Navigation.NavigateTo("/cadastros/motoristas");
+}

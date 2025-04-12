@@ -1,33 +1,31 @@
-﻿
-<MudNavMenu>
-    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+﻿@using MudBlazor
 
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="/cadastros/empresas">
-            <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Empresas
-        </NavLink>
-    </div>
+<MudDrawer Variant="DrawerVariant.Mini" Elevation="1" Class="mud-theme-primary">
+    <MudNavMenu>
+        <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">
+            Início
+        </MudNavLink>
 
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="/cadastros/pessoas">
-            <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Pessoas
-        </NavLink>
-    </div>
+        <MudNavGroup Title="Cadastros" Icon="@Icons.Material.Filled.List">
+            <MudNavLink Href="/cadastros/empresas" Icon="@Icons.Material.Filled.Apartment">
+                Empresas
+            </MudNavLink>
 
-</MudNavMenu>
+            <MudNavLink Href="/cadastros/pessoas" Icon="@Icons.Material.Filled.People">
+                Pessoas
+            </MudNavLink>
 
+            <MudNavLink Href="/cadastros/transportadoras" Icon="@Icons.Material.Filled.LocalShipping">
+                Transportadoras
+            </MudNavLink>
 
-@* 
-   <div class="nav-item px-3">
-    <NavLink class="nav-link" href="/cadastros/empresas">
-        <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Empresas
-    </NavLink>
-</div>
+            <MudNavLink Href="/cadastros/veiculos" Icon="@Icons.Material.Filled.DirectionsCar">
+                Veículos
+            </MudNavLink>
 
-<div class="nav-item px-3">
-    <NavLink class="nav-link" href="/cadastros/pessoas">
-        <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Pessoas
-    </NavLink>
-</div>
-
-*@
+            <MudNavLink Href="/cadastros/motoristas" Icon="@Icons.Material.Filled.Person">
+                Motoristas
+            </MudNavLink>
+        </MudNavGroup>
+    </MudNavMenu>
+</MudDrawer>

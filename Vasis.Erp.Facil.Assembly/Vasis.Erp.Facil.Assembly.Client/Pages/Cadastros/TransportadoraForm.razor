@@ -1,0 +1,50 @@
+﻿@page "/cadastros/transportadoras/nova"
+@page "/cadastros/transportadoras/{Id:guid}"
+@using Vasis.Erp.Facil.Shared.Entities.Cadastros
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<MudPaper Class="p-4">
+    <MudText Typo="Typo.h5">@(_isNovo ? "Nova Transportadora" : "Editar Transportadora")</MudText>
+
+    <EditForm Model="_transportadora" OnValidSubmit="Salvar">
+        <MudTextField T="string" Label="Nome" @bind-Value="_transportadora.Nome" Required="true" />
+        <MudTextField Label="CNPJ" @bind-Value="_transportadora.Cnpj" />
+        <MudTextField Label="Inscrição Estadual" @bind-Value="_transportadora.Ie" />
+        <MudTextField Label="Email" @bind-Value="_transportadora.Email" />
+        <MudTextField Label="Telefone" @bind-Value="_transportadora.Telefone" />
+        <MudTextField Label="Endereço" @bind-Value="_transportadora.Endereco" />
+        <MudTextField Label="Cidade" @bind-Value="_transportadora.Cidade" />
+        <MudTextField Label="UF" @bind-Value="_transportadora.Uf" MaxLength="2" />
+
+        <MudButton Type="Submit" Variant="Variant.Filled" Color="Color.Primary" Class="mt-2">Salvar</MudButton>
+        <MudButton Variant="Variant.Outlined" OnClick="Cancelar" Class="mt-2 ml-2">Cancelar</MudButton>
+    </EditForm>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid? Id { get; set; }
+    private Transportadora _transportadora = new();
+    private bool _isNovo => !Id.HasValue;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!_isNovo)
+        {
+            var obj = await Http.GetFromJsonAsync<Transportadora>($"api/transportadora/{Id}");
+            if (obj is not null) _transportadora = obj;
+        }
+    }
+
+    private async Task Salvar()
+    {
+        if (_isNovo)
+            await Http.PostAsJsonAsync("api/transportadora", _transportadora);
+        else
+            await Http.PutAsJsonAsync($"api/transportadora/{_transportadora.Id}", _transportadora);
+
+        Navigation.NavigateTo("/cadastros/transportadoras");
+    }
+
+    void Cancelar() => Navigation.NavigateTo("/cadastros/transportadoras");
+}
