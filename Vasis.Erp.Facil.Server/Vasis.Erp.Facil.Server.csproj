@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.15" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Vasis.Erp.Facil.Data\Vasis.Erp.Facil.Data.csproj" />
+  </ItemGroup>
+
 </Project>
