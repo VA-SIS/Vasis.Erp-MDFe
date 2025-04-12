@@ -1,6 +1,8 @@
 using Vasis.Erp.Facil.Data;
 using Vasis.Erp.Facil.Server.Components;
 using Microsoft.EntityFrameworkCore;
+using Vasis.Erp.Facil.Services.Cadastros;
+using Vasis.Erp.Facil.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+
+builder.Services.AddScoped<TransportadoraService>();
+builder.Services.AddScoped<VeiculoService>();
+builder.Services.AddScoped<MotoristaService>();
 
 var app = builder.Build();
 

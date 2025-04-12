@@ -1,0 +1,43 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Vasis.Erp.Facil.Data;
+using Vasis.Erp.Facil.Shared.Entities.Cadastros;
+
+namespace Vasis.Erp.Facil.Services.Cadastros;
+
+public class TransportadoraService
+{
+    private readonly AppDbContext _context;
+
+    public TransportadoraService(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<List<Transportadora>> ListarAsync()
+        => await _context.Set<Transportadora>().ToListAsync();
+
+    public async Task<Transportadora?> ObterPorIdAsync(Guid id)
+        => await _context.Set<Transportadora>().FindAsync(id);
+
+    public async Task AdicionarAsync(Transportadora obj)
+    {
+        _context.Add(obj);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task AtualizarAsync(Transportadora obj)
+    {
+        _context.Update(obj);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task RemoverAsync(Guid id)
+    {
+        var obj = await ObterPorIdAsync(id);
+        if (obj is not null)
+        {
+            _context.Remove(obj);
+            await _context.SaveChangesAsync();
+        }
+    }
+}
