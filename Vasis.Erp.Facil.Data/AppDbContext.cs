@@ -17,6 +17,9 @@ public class AppDbContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new EmpresaMap());
         modelBuilder.ApplyConfiguration(new PessoaMap());
+        modelBuilder.ApplyConfiguration(new TransportadoraMap());
+        modelBuilder.ApplyConfiguration(new VeiculoMap());
+        modelBuilder.ApplyConfiguration(new MotoristaMap());
 
         base.OnModelCreating(modelBuilder);
     }
