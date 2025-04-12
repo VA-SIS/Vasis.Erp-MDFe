@@ -1,4 +1,6 @@
-﻿namespace Vasis.Erp.Facil.Shared.Entities;
+﻿using Vasis.Erp.Facil.Shared.Entities.Cadastros;
+
+namespace Vasis.Erp.Facil.Shared.Entities;
 
 public class Empresa
 {
@@ -18,4 +20,7 @@ public class Empresa
     public string Estado { get; set; } = string.Empty;
     public bool Ativa { get; set; } = true;
     public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
+
+    public ICollection<Pessoa>? Pessoas { get; set; }
+
 }
