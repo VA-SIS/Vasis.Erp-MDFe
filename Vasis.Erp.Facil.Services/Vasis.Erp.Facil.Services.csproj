@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vasis.Erp.Facil.Data\Vasis.Erp.Facil.Data.csproj" />
+    <ProjectReference Include="..\Vasis.Erp.Facil.Shared\Vasis.Erp.Facil.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
