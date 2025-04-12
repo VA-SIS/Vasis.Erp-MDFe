@@ -1,0 +1,59 @@
+﻿@page "/cadastros/pessoas/nova"
+@page "/cadastros/pessoas/{Id:guid}"
+@using Vasis.Erp.Facil.Shared.Entities
+@using Vasis.Erp.Facil.Shared.Entities.Cadastros
+@inject NavigationManager Navigation
+@inject HttpClient Http
+
+<MudPaper Class="p-4">
+    <MudText Typo="Typo.h5">@(_isNovo ? "Nova Pessoa" : "Editar Pessoa")</MudText>
+
+    <EditForm Model="_pessoa" OnValidSubmit="Salvar">
+        <MudTextField Label="Nome" @bind-Value="_pessoa.Nome" Required="true" />
+        <MudTextField Label="Nome Fantasia" @bind-Value="_pessoa.NomeFantasia" />
+        <MudTextField Label="CPF/CNPJ" @bind-Value="_pessoa.CpfCnpj" Required="true" />
+        <MudTextField Label="RG/IE" @bind-Value="_pessoa.RgIe" />
+
+        <MudSelect T="string" Label="Tipo Pessoa" @bind-Value="_pessoa.TipoPessoa" Required="true">
+            <MudSelectItem Value="F">Física</MudSelectItem>
+            <MudSelectItem Value="J">Jurídica</MudSelectItem>
+        </MudSelect>
+
+        <MudTextField Label="Email" @bind-Value="_pessoa.Email" />
+        <MudTextField Label="Telefone" @bind-Value="_pessoa.Telefone" />
+        <MudTextField Label="Endereço" @bind-Value="_pessoa.Endereco" />
+        <MudTextField Label="Cidade" @bind-Value="_pessoa.Cidade" />
+        <MudTextField Label="UF" @bind-Value="_pessoa.Uf" MaxLength="2" />
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Type="Submit" Class="mt-2">Salvar</MudButton>
+        <MudButton Variant="Variant.Outlined" OnClick="Cancelar" Class="mt-2 ml-2">Cancelar</MudButton>
+    </EditForm>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid? Id { get; set; }
+    private Pessoa _pessoa = new();
+    private bool _isNovo => !Id.HasValue;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!_isNovo)
+        {
+            var pessoa = await Http.GetFromJsonAsync<Pessoa>($"api/pessoas/{Id}");
+            if (pessoa != null)
+                _pessoa = pessoa;
+        }
+    }
+
+    private async Task Salvar()
+    {
+        if (_isNovo)
+            await Http.PostAsJsonAsync("api/pessoas", _pessoa);
+        else
+            await Http.PutAsJsonAsync($"api/pessoas/{_pessoa.Id}", _pessoa);
+
+        Navigation.NavigateTo("/cadastros/pessoas");
+    }
+
+    void Cancelar() => Navigation.NavigateTo("/cadastros/pessoas");
+}

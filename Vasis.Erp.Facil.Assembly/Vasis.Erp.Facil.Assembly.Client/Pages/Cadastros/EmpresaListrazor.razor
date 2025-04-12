@@ -1,0 +1,40 @@
+﻿@page "/cadastros/empresas"
+@using Vasis.Erp.Facil.Shared.Entities
+@inject NavigationManager Navigation
+@inject HttpClient Http
+
+<MudPaper Class="p-4">
+    <MudText Typo="Typo.h5">Empresas</MudText>
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="NovaEmpresa" StartIcon="@Icons.Material.Filled.Add">
+        Nova Empresa
+    </MudButton>
+
+    <MudTable Items="_empresas" Hover="true" Class="mt-4">
+        <HeaderContent>
+            <MudTh>Razão Social</MudTh>
+            <MudTh>CNPJ</MudTh>
+            <MudTh>Ações</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.RazaoSocial</MudTd>
+            <MudTd>@context.Cnpj</MudTd>
+            <MudTd>
+                <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="@(() => EditarEmpresa(context.Id))" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudPaper>
+
+@code {
+    private List<Empresa> _empresas = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _empresas = await Http.GetFromJsonAsync<List<Empresa>>("api/empresas") ?? new();
+    }
+
+    void NovaEmpresa() => Navigation.NavigateTo("/cadastros/empresas/nova");
+
+    void EditarEmpresa(Guid id) => Navigation.NavigateTo($"/cadastros/empresas/{id}");
+}

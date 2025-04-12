@@ -1,0 +1,50 @@
+﻿@page "/cadastros/empresas/nova"
+@page "/cadastros/empresas/{Id:guid}"
+@using Vasis.Erp.Facil.Shared.Entities
+@inject NavigationManager Navigation
+@inject HttpClient Http
+
+<MudPaper Class="p-4">
+    <MudText Typo="Typo.h5">@(_isNovo ? "Nova Empresa" : "Editar Empresa")</MudText>
+
+    <EditForm Model="_empresa" OnValidSubmit="Salvar">
+        <MudTextField Label="Razão Social" @bind-Value="_empresa.RazaoSocial" Required="true" />
+        <MudTextField Label="Nome Fantasia" @bind-Value="_empresa.NomeFantasia" />
+        <MudTextField Label="CNPJ" @bind-Value="_empresa.Cnpj" Required="true" />
+        <MudTextField Label="Email" @bind-Value="_empresa.Email" />
+        <MudTextField Label="Telefone" @bind-Value="_empresa.Telefone" />
+        <MudTextField Label="Endereço" @bind-Value="_empresa.Endereco" />
+        <MudTextField Label="Inscrição Estadual" @bind-Value="_empresa.InscricaoEstadual" />
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Type="Submit" Class="mt-2">Salvar</MudButton>
+        <MudButton Variant="Variant.Outlined" OnClick="Cancelar" Class="mt-2 ml-2">Cancelar</MudButton>
+    </EditForm>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid? Id { get; set; }
+    private Empresa _empresa = new();
+    private bool _isNovo => !Id.HasValue;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!_isNovo)
+        {
+            var empresa = await Http.GetFromJsonAsync<Empresa>($"api/empresas/{Id}");
+            if (empresa != null)
+                _empresa = empresa;
+        }
+    }
+
+    private async Task Salvar()
+    {
+        if (_isNovo)
+            await Http.PostAsJsonAsync("api/empresas", _empresa);
+        else
+            await Http.PutAsJsonAsync($"api/empresas/{_empresa.Id}", _empresa);
+
+        Navigation.NavigateTo("/cadastros/empresas");
+    }
+
+    void Cancelar() => Navigation.NavigateTo("/cadastros/empresas");
+}

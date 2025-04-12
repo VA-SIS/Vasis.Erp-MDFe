@@ -1,0 +1,42 @@
+﻿@page "/cadastros/pessoas"
+@using Vasis.Erp.Facil.Shared.Entities
+@inject NavigationManager Navigation
+@inject HttpClient Http
+
+<MudPaper Class="p-4">
+    <MudText Typo="Typo.h5">Pessoas</MudText>
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="NovaPessoa" StartIcon="@Icons.Material.Filled.Add">
+        Nova Pessoa
+    </MudButton>
+
+    <MudTable Items="_pessoas" Hover="true" Class="mt-4">
+        <HeaderContent>
+            <MudTh>Nome</MudTh>
+            <MudTh>CPF/CNPJ</MudTh>
+            <MudTh>Tipo</MudTh>
+            <MudTh>Ações</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.Nome</MudTd>
+            <MudTd>@context.CpfCnpj</MudTd>
+            <MudTd>@(context.TipoPessoa == "F" ? "Física" : "Jurídica")</MudTd>
+            <MudTd>
+                <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="@(() => EditarPessoa(context.Id))" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudPaper>
+
+@code {
+    private List<Pessoa> _pessoas = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _pessoas = await Http.GetFromJsonAsync<List<Pessoa>>("api/pessoas") ?? new();
+    }
+
+    void NovaPessoa() => Navigation.NavigateTo("/cadastros/pessoas/nova");
+
+    void EditarPessoa(Guid id) => Navigation.NavigateTo($"/cadastros/pessoas/{id}");
+}

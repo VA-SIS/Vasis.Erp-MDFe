@@ -13,4 +13,8 @@
     <PackageReference Include="MudBlazor" Version="7.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Vasis.Erp.Facil.Shared\Vasis.Erp.Facil.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
