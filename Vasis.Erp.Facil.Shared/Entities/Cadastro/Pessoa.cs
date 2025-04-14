@@ -1,4 +1,6 @@
-﻿namespace Vasis.Erp.Facil.Shared.Entities.Cadastros;
+﻿using Vasis.Erp.Facil.Shared.Entities.Cadastro;
+
+namespace Vasis.Erp.Facil.Shared.Entities.Cadastros;
 
 public class Pessoa
 {

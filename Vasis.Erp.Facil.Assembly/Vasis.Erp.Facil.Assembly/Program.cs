@@ -1,8 +1,12 @@
 using MudBlazor.Services;
-using Vasis.Erp.Facil.Assembly.Client.Pages;
 using Vasis.Erp.Facil.Assembly.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri("https://localhost:7249/")
+});
 
 // Add MudBlazor services
 builder.Services.AddMudServices();

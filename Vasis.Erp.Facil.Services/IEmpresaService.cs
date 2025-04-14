@@ -1,4 +1,4 @@
-﻿using Vasis.Erp.Facil.Shared.Entities;
+﻿using Vasis.Erp.Facil.Shared.Entities.Cadastro;
 
 namespace Vasis.Erp.Facil.Services;
 

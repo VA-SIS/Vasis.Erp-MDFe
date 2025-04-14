@@ -1,16 +1,17 @@
 ﻿@page "/cadastros/transportadoras"
-@using Vasis.Erp.Facil.Shared.Entities.Cadastros
 @inject HttpClient Http
 @inject NavigationManager Navigation
+@using Vasis.Erp.Facil.Shared.Entities.Cadastros
+@using MudBlazor
 
 <MudPaper Class="p-4">
-    <MudText Typo="Typo.h5">Transportadoras</MudText>
+    <MudText Typo="Typo.h5" Class="mb-2">Transportadoras</MudText>
 
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Nova" Class="mb-2">
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Nova" Class="mb-4">
         Nova Transportadora
     </MudButton>
 
-    <MudTable Items="_lista" Hover="true">
+    <MudTable Items="_lista" Hover="true" Dense="true">
         <HeaderContent>
             <MudTh>Nome</MudTh>
             <MudTh>CNPJ</MudTh>
@@ -20,34 +21,80 @@
             <MudTd DataLabel="Nome">@context.Nome</MudTd>
             <MudTd DataLabel="CNPJ">@context.Cnpj</MudTd>
             <MudTd>
-                <MudIconButton Icon="Edit" Color="Color.Primary" OnClick="@(() => Editar(context.Id))" />
-                <MudIconButton Icon="Delete" Color="Color.Error" OnClick="@(() => Excluir(context.Id))" />
+                <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => Editar(context.Id))" />
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => ConfirmarExcluir(context))" />
             </MudTd>
         </RowTemplate>
     </MudTable>
 </MudPaper>
 
+<MudDialog @bind-IsOpen="_confirmarExclusao" MaxWidth="MaxWidth.Small">
+    <DialogContent>
+        <MudText Typo="Typo.body1">
+            Deseja realmente excluir a transportadora <b>@_selecionada?.Nome</b>?
+        </MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="Excluir">Sim</MudButton>
+        <MudButton Variant="Variant.Outlined" OnClick="@(() => _confirmarExclusao = false)">Cancelar</MudButton>
+    </DialogActions>
+</MudDialog>
+
 @code {
-    private List<Transportadora> _lista = [];
+    private List<Transportadora> _lista = new();
+    private Transportadora? _selecionada;
+    private bool _confirmarExclusao = false;
 
     protected override async Task OnInitializedAsync()
     {
-        _lista = await Http.GetFromJsonAsync<List<Transportadora>>("api/transportadora") ?? [];
+        await CarregarTransportadoras();
     }
 
-    void Nova() => Navigation.NavigateTo("/cadastros/transportadoras/nova");
-
-    void Editar(Guid id) => Navigation.NavigateTo($"/cadastros/transportadoras/{id}");
-
-    async Task Excluir(Guid id)
+    private async Task CarregarTransportadoras()
     {
-        if (await JsConfirmar("Deseja excluir esta transportadora?"))
+        try
         {
-            await Http.DeleteAsync($"api/transportadora/{id}");
-            _lista = await Http.GetFromJsonAsync<List<Transportadora>>("api/transportadora") ?? [];
+            _lista = await Http.GetFromJsonAsync<List<Transportadora>>("api/transportadora") ?? new();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Erro ao carregar transportadoras: {ex.Message}");
         }
     }
 
-    async Task<bool> JsConfirmar(string msg)
-        => await Task.FromResult(confirm(msg)); // substitua por diálogo real se desejar
+    private void Nova()
+    {
+        Navigation.NavigateTo("/cadastros/transportadoras/nova");
+    }
+
+    private void Editar(Guid id)
+    {
+        Navigation.NavigateTo($"/cadastros/transportadoras/{id}");
+    }
+
+    private void ConfirmarExcluir(Transportadora transportadora)
+    {
+        _selecionada = transportadora;
+        _confirmarExclusao = true;
+    }
+
+    private async Task Excluir()
+    {
+        if (_selecionada is not null)
+        {
+            try
+            {
+                await Http.DeleteAsync($"api/transportadora/{_selecionada.Id}");
+                await CarregarTransportadoras();
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Erro ao excluir transportadora: {ex.Message}");
+            }
+            finally
+            {
+                _confirmarExclusao = false;
+            }
+        }
+    }
 }

@@ -1,6 +1,6 @@
 ﻿using Vasis.Erp.Facil.Shared.Entities.Cadastros;
 
-namespace Vasis.Erp.Facil.Shared.Entities;
+namespace Vasis.Erp.Facil.Shared.Entities.Cadastro;
 
 public class Empresa
 {
@@ -22,5 +22,6 @@ public class Empresa
     public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
 
     public ICollection<Pessoa>? Pessoas { get; set; }
-
+    public DateTime CriadoEm { get; set; }
+    public DateTime AtualizadoEm { get; set; }
 }

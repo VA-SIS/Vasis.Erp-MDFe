@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using Vasis.Erp.Facil.Shared.Entities;
+using Vasis.Erp.Facil.Shared.Entities.Cadastro;
 
-namespace Vasis.Erp.Facil.Shared.Validators;
+namespace Vasis.Erp.Facil.Shared.Validators.Cadastros;
 
 public class EmpresaValidator : AbstractValidator<Empresa>
 {

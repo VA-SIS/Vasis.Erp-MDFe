@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Vasis.Erp.Facil.Shared.Entities;
+using Vasis.Erp.Facil.Shared.Entities.Cadastro;
 using Vasis.Erp.Facil.Shared.Entities.Cadastros;
 using Vasis.Erp.Facil.Shared.Mappings;
 using Vasis.Erp.Facil.Shared.Mappings.Cadastros;
