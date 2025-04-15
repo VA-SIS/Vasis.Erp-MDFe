@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Shared", "V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Tests", "Vasis.Erp.Facil.Tests\Vasis.Erp.Facil.Tests.csproj", "{49720E78-2136-4424-956B-47322AF0241D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Application.Interfaces", "Vasis.Erp.Facil.Application.Interfaces\Vasis.Erp.Facil.Application.Interfaces.csproj", "{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{49720E78-2136-4424-956B-47322AF0241D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49720E78-2136-4424-956B-47322AF0241D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49720E78-2136-4424-956B-47322AF0241D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{28B61A55-AEEC-4372-86E1-C81A89FC8AD3} = {5F6B4FBC-5AE0-43F4-B85A-BA98CA129765}
 		{E73E40ED-2429-4616-8C0D-B4C56F5C7A2D} = {95409D6E-E0DA-4CF7-874E-B60F893FDA4F}
 		{49720E78-2136-4424-956B-47322AF0241D} = {D97A3647-D5D5-4937-91BF-8C7FE0AF82DC}
+		{3EB90C35-7577-4CC7-BF5F-251CD51B84DD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {49D8D1F7-6DFD-45AA-8701-3DE45CA8E07B}

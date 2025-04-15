@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Vasis.Erp.Facil.Services;
+using Vasis.Erp.Facil.Application.Interfaces.Services;
 using Vasis.Erp.Facil.Shared.Entities.Cadastros;
 
 namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
@@ -8,43 +8,39 @@ namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 [Route("api/[controller]")]
 public class VeiculoController : ControllerBase
 {
-    private readonly VeiculoService _service;
+    private readonly IVeiculoService _veiculoService;
 
-    public VeiculoController(VeiculoService service)
+    public VeiculoController(IVeiculoService veiculoService)
     {
-        _service = service;
+        _veiculoService = veiculoService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Veiculo>>> Get()
-        => Ok(await _service.ListarAsync());
+    public async Task<ActionResult<IEnumerable<Veiculo>>> Get() =>
+        Ok(await _veiculoService.ListarAsync());
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Veiculo>> GetById(Guid id)
+    public async Task<ActionResult<Veiculo?>> Get(Guid id)
     {
-        var obj = await _service.ObterPorIdAsync(id);
-        return obj is null ? NotFound() : Ok(obj);
+        var result = await _veiculoService.ObterPorIdAsync(id);
+        return result is null ? NotFound() : Ok(result);
     }
 
     [HttpPost]
-    public async Task<ActionResult> Post([FromBody] Veiculo obj)
-    {
-        await _service.AdicionarAsync(obj);
-        return Ok(obj);
-    }
+    public async Task<ActionResult<Veiculo>> Post([FromBody] Veiculo veiculo) =>
+        Ok(await _veiculoService.CriarAsync(veiculo));
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> Put(Guid id, [FromBody] Veiculo obj)
+    public async Task<ActionResult<Veiculo>> Put(Guid id, [FromBody] Veiculo veiculo)
     {
-        if (id != obj.Id) return BadRequest();
-        await _service.AtualizarAsync(obj);
-        return NoContent();
+        if (id != veiculo.Id) return BadRequest();
+        return Ok(await _veiculoService.AtualizarAsync(veiculo));
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(Guid id)
     {
-        await _service.RemoverAsync(id);
-        return NoContent();
+        var sucesso = await _veiculoService.RemoverAsync(id);
+        return sucesso ? Ok() : NotFound();
     }
 }

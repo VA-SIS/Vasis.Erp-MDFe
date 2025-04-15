@@ -18,12 +18,32 @@ builder.Services.AddRazorComponents()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddScoped<EmpresaService>();
+builder.Services.AddScoped<PessoaService>();
 builder.Services.AddScoped<TransportadoraService>();
 builder.Services.AddScoped<VeiculoService>();
 builder.Services.AddScoped<MotoristaService>();
 
+
 var app = builder.Build();
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirFrontend", policy =>
+    {
+        policy
+            .WithOrigins("https://localhost:5037") // porta do Blazor Client
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
+
+
+app.UseCors("PermitirFrontend");
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

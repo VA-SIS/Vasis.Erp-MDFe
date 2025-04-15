@@ -1,68 +1,46 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Vasis.Erp.Facil.Data;
+using Vasis.Erp.Facil.Application.Interfaces.Services;
 using Vasis.Erp.Facil.Shared.Entities.Cadastros;
 
-namespace Vasis.Erp.Facil.Backend.Controllers;
+namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 
 [ApiController]
 [Route("api/[controller]")]
 public class PessoaController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly IPessoaService _pessoaService;
 
-    public PessoaController(AppDbContext context)
+    public PessoaController(IPessoaService pessoaService)
     {
-        _context = context;
+        _pessoaService = pessoaService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Pessoa>>> GetAll()
-    {
-        return await _context.Pessoas.AsNoTracking().ToListAsync();
-    }
+    public async Task<ActionResult<IEnumerable<Pessoa>>> Get() =>
+        Ok(await _pessoaService.ListarAsync());
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Pessoa>> GetById(Guid id)
+    public async Task<ActionResult<Pessoa?>> Get(Guid id)
     {
-        var pessoa = await _context.Pessoas.FindAsync(id);
-        return pessoa is null ? NotFound() : pessoa;
+        var result = await _pessoaService.ObterPorIdAsync(id);
+        return result is null ? NotFound() : Ok(result);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Pessoa>> Create(Pessoa model)
-    {
-        model.Id = Guid.NewGuid();
-        model.CriadoEm = DateTime.UtcNow;
-        _context.Pessoas.Add(model);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById), new { id = model.Id }, model);
-    }
+    public async Task<ActionResult<Pessoa>> Post([FromBody] Pessoa pessoa) =>
+        Ok(await _pessoaService.CriarAsync(pessoa));
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, Pessoa model)
+    public async Task<ActionResult<Pessoa>> Put(Guid id, [FromBody] Pessoa pessoa)
     {
-        if (id != model.Id) return BadRequest();
-
-        var entity = await _context.Pessoas.FindAsync(id);
-        if (entity is null) return NotFound();
-
-        model.AtualizadoEm = DateTime.UtcNow;
-        _context.Entry(entity).CurrentValues.SetValues(model);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
+        if (id != pessoa.Id) return BadRequest();
+        return Ok(await _pessoaService.AtualizarAsync(pessoa));
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<ActionResult> Delete(Guid id)
     {
-        var entity = await _context.Pessoas.FindAsync(id);
-        if (entity is null) return NotFound();
-
-        _context.Pessoas.Remove(entity);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
+        var sucesso = await _pessoaService.RemoverAsync(id);
+        return sucesso ? Ok() : NotFound();
     }
 }

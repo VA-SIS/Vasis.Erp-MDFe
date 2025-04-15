@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Vasis.Erp.Facil.Services.Cadastros;
+using Vasis.Erp.Facil.Application.Interfaces.Services;
 using Vasis.Erp.Facil.Shared.Entities.Cadastros;
 
 namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
@@ -8,43 +8,39 @@ namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 [Route("api/[controller]")]
 public class TransportadoraController : ControllerBase
 {
-    private readonly TransportadoraService _service;
+    private readonly ITransportadoraService _transportadoraService;
 
-    public TransportadoraController(TransportadoraService service)
+    public TransportadoraController(ITransportadoraService transportadoraService)
     {
-        _service = service;
+        _transportadoraService = transportadoraService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Transportadora>>> Get()
-        => Ok(await _service.ListarAsync());
+    public async Task<ActionResult<IEnumerable<Transportadora>>> Get() =>
+        Ok(await _transportadoraService.ListarAsync());
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Transportadora>> GetById(Guid id)
+    public async Task<ActionResult<Transportadora?>> Get(Guid id)
     {
-        var obj = await _service.ObterPorIdAsync(id);
-        return obj is null ? NotFound() : Ok(obj);
+        var result = await _transportadoraService.ObterPorIdAsync(id);
+        return result is null ? NotFound() : Ok(result);
     }
 
     [HttpPost]
-    public async Task<ActionResult> Post([FromBody] Transportadora obj)
-    {
-        await _service.AdicionarAsync(obj);
-        return Ok(obj);
-    }
+    public async Task<ActionResult<Transportadora>> Post([FromBody] Transportadora transportadora) =>
+        Ok(await _transportadoraService.CriarAsync(transportadora));
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> Put(Guid id, [FromBody] Transportadora obj)
+    public async Task<ActionResult<Transportadora>> Put(Guid id, [FromBody] Transportadora transportadora)
     {
-        if (id != obj.Id) return BadRequest();
-        await _service.AtualizarAsync(obj);
-        return NoContent();
+        if (id != transportadora.Id) return BadRequest();
+        return Ok(await _transportadoraService.AtualizarAsync(transportadora));
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(Guid id)
     {
-        await _service.RemoverAsync(id);
-        return NoContent();
+        var sucesso = await _transportadoraService.RemoverAsync(id);
+        return sucesso ? Ok() : NotFound();
     }
 }

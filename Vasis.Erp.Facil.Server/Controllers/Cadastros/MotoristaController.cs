@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Vasis.Erp.Facil.Services;
+using Vasis.Erp.Facil.Application.Interfaces.Services;
 using Vasis.Erp.Facil.Shared.Entities.Cadastros;
 
 namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
@@ -8,43 +8,39 @@ namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 [Route("api/[controller]")]
 public class MotoristaController : ControllerBase
 {
-    private readonly MotoristaService _service;
+    private readonly IMotoristaService _motoristaService;
 
-    public MotoristaController(MotoristaService service)
+    public MotoristaController(IMotoristaService motoristaService)
     {
-        _service = service;
+        _motoristaService = motoristaService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Motorista>>> Get()
-        => Ok(await _service.ListarAsync());
+    public async Task<ActionResult<IEnumerable<Motorista>>> Get() =>
+        Ok(await _motoristaService.ListarAsync());
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Motorista>> GetById(Guid id)
+    public async Task<ActionResult<Motorista?>> Get(Guid id)
     {
-        var obj = await _service.ObterPorIdAsync(id);
-        return obj is null ? NotFound() : Ok(obj);
+        var result = await _motoristaService.ObterPorIdAsync(id);
+        return result is null ? NotFound() : Ok(result);
     }
 
     [HttpPost]
-    public async Task<ActionResult> Post([FromBody] Motorista obj)
-    {
-        await _service.AdicionarAsync(obj);
-        return Ok(obj);
-    }
+    public async Task<ActionResult<Motorista>> Post([FromBody] Motorista motorista) =>
+        Ok(await _motoristaService.CriarAsync(motorista));
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> Put(Guid id, [FromBody] Motorista obj)
+    public async Task<ActionResult<Motorista>> Put(Guid id, [FromBody] Motorista motorista)
     {
-        if (id != obj.Id) return BadRequest();
-        await _service.AtualizarAsync(obj);
-        return NoContent();
+        if (id != motorista.Id) return BadRequest();
+        return Ok(await _motoristaService.AtualizarAsync(motorista));
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(Guid id)
     {
-        await _service.RemoverAsync(id);
-        return NoContent();
+        var sucesso = await _motoristaService.RemoverAsync(id);
+        return sucesso ? Ok() : NotFound();
     }
 }
