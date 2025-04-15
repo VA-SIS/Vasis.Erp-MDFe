@@ -1,68 +1,46 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Vasis.Erp.Facil.Data;
+using Vasis.Erp.Facil.Services;
 using Vasis.Erp.Facil.Shared.Entities.Cadastro;
 
-namespace Vasis.Erp.Facil.Backend.Controllers;
+namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 
 [ApiController]
 [Route("api/[controller]")]
 public class EmpresaController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly IEmpresaService _empresaService;
 
-    public EmpresaController(AppDbContext context)
+    public EmpresaController(IEmpresaService empresaService)
     {
-        _context = context;
+        _empresaService = empresaService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Empresa>>> GetAll()
-    {
-        return await _context.Empresas.AsNoTracking().ToListAsync();
-    }
+    public async Task<ActionResult<IEnumerable<Empresa>>> Get() =>
+        Ok(await _empresaService.ListarAsync());
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Empresa>> GetById(Guid id)
+    public async Task<ActionResult<Empresa?>> Get(Guid id)
     {
-        var empresa = await _context.Empresas.FindAsync(id);
-        return empresa is null ? NotFound() : empresa;
+        var result = await _empresaService.ObterPorIdAsync(id);
+        return result is null ? NotFound() : Ok(result);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Empresa>> Create(Empresa model)
-    {
-        model.Id = Guid.NewGuid();
-        model.CriadoEm = DateTime.UtcNow;
-        _context.Empresas.Add(model);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById), new { id = model.Id }, model);
-    }
+    public async Task<ActionResult<Empresa>> Post([FromBody] Empresa empresa) =>
+        Ok(await _empresaService.CriarAsync(empresa));
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, Empresa model)
+    public async Task<ActionResult<Empresa>> Put(Guid id, [FromBody] Empresa empresa)
     {
-        if (id != model.Id) return BadRequest();
-
-        var entity = await _context.Empresas.FindAsync(id);
-        if (entity is null) return NotFound();
-
-        model.AtualizadoEm = DateTime.UtcNow;
-        _context.Entry(entity).CurrentValues.SetValues(model);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
+        if (id != empresa.Id) return BadRequest();
+        return Ok(await _empresaService.AtualizarAsync(empresa));
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<ActionResult> Delete(Guid id)
     {
-        var entity = await _context.Empresas.FindAsync(id);
-        if (entity is null) return NotFound();
-
-        _context.Empresas.Remove(entity);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
+        var sucesso = await _empresaService.RemoverAsync(id);
+        return sucesso ? Ok() : NotFound();
     }
 }

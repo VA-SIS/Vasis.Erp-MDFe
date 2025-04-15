@@ -9,4 +9,5 @@ public interface IEmpresaService
     Task CriarAsync(Empresa empresa);
     Task AtualizarAsync(Empresa empresa);
     Task ExcluirAsync(Guid id);
+    Task ObterPorIdAsync(Guid id);
 }

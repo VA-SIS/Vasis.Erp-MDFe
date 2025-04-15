@@ -38,5 +38,9 @@ public class EmpresaService : IEmpresaService
 
     public async Task CriarAsync(Empresa empresa)    
       => await  AdicionarAsync(empresa);
-    
+
+    public async Task ObterPorIdAsync(Guid id)
+    {
+        throw new NotImplementedException();
+    }
 }
