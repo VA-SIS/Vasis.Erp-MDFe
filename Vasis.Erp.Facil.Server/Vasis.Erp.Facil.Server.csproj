@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.15">
       <PrivateAssets>all</PrivateAssets>
@@ -18,17 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vasis.Erp.Facil.Application.Interfaces\Vasis.Erp.Facil.Application.Interfaces.csproj" />
+    <ProjectReference Include="..\Vasis.Erp.Facil.Application.Interfaces\Vasis.Erp.Facil.Application.csproj" />
     <ProjectReference Include="..\Vasis.Erp.Facil.Data\Vasis.Erp.Facil.Data.csproj" />
     <ProjectReference Include="..\Vasis.Erp.Facil.Services\Vasis.Erp.Facil.Services.csproj" />
     <ProjectReference Include="..\Vasis.Erp.Facil.Shared\Vasis.Erp.Facil.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Validators\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

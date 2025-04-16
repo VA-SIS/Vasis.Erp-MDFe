@@ -30,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Shared", "V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Tests", "Vasis.Erp.Facil.Tests\Vasis.Erp.Facil.Tests.csproj", "{49720E78-2136-4424-956B-47322AF0241D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Application.Interfaces", "Vasis.Erp.Facil.Application.Interfaces\Vasis.Erp.Facil.Application.Interfaces.csproj", "{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Application", "Vasis.Erp.Facil.Application.Interfaces\Vasis.Erp.Facil.Application.csproj", "{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

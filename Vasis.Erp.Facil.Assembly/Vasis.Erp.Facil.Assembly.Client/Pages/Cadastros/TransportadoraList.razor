@@ -1,49 +1,42 @@
 ﻿@page "/cadastros/transportadoras"
-@inject HttpClient Http
-@inject NavigationManager Navigation
-@using Vasis.Erp.Facil.Shared.Entities.Cadastros
-@using MudBlazor
 
-<MudPaper Class="p-4">
-    <MudText Typo="Typo.h5" Class="mb-2">Transportadoras</MudText>
+@inject ITransportadoraService TransportadoraService
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
 
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Nova" Class="mb-4">
-        Nova Transportadora
-    </MudButton>
+<PageTitle>Transportadoras</PageTitle>
 
-    <MudTable Items="_lista" Hover="true" Dense="true">
+<MudPaper Class="pa-4">
+    <MudStack Row Justify="space-between" AlignItems="center">
+        <MudText Typo="Typo.h6">Transportadoras</MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@Novo">
+            <MudIcon Icon="@Icons.Material.Filled.Add" Class="me-2" /> Nova Transportadora
+        </MudButton>
+    </MudStack>
+
+    <MudTable Items="_transportadoras" Hover="true" Dense="true">
         <HeaderContent>
             <MudTh>Nome</MudTh>
             <MudTh>CNPJ</MudTh>
+            <MudTh>Email</MudTh>
+            <MudTh>Telefone</MudTh>
             <MudTh>Ações</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd DataLabel="Nome">@context.Nome</MudTd>
-            <MudTd DataLabel="CNPJ">@context.Cnpj</MudTd>
+            <MudTd>@context.Nome</MudTd>
+            <MudTd>@context.Cnpj</MudTd>
+            <MudTd>@context.Email</MudTd>
+            <MudTd>@context.Telefone</MudTd>
             <MudTd>
                 <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => Editar(context.Id))" />
-                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => ConfirmarExcluir(context))" />
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => Excluir(context.Id))" />
             </MudTd>
         </RowTemplate>
     </MudTable>
 </MudPaper>
 
-<MudDialog @bind-IsOpen="_confirmarExclusao" MaxWidth="MaxWidth.Small">
-    <DialogContent>
-        <MudText Typo="Typo.body1">
-            Deseja realmente excluir a transportadora <b>@_selecionada?.Nome</b>?
-        </MudText>
-    </DialogContent>
-    <DialogActions>
-        <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="Excluir">Sim</MudButton>
-        <MudButton Variant="Variant.Outlined" OnClick="@(() => _confirmarExclusao = false)">Cancelar</MudButton>
-    </DialogActions>
-</MudDialog>
-
 @code {
-    private List<Transportadora> _lista = new();
-    private Transportadora? _selecionada;
-    private bool _confirmarExclusao = false;
+    private List<TransportadoraDto> _transportadoras = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -52,48 +45,50 @@
 
     private async Task CarregarTransportadoras()
     {
-        try
-        {
-            _lista = await Http.GetFromJsonAsync<List<Transportadora>>("api/transportadora") ?? new();
-        }
-        catch (Exception ex)
-        {
-            Console.Error.WriteLine($"Erro ao carregar transportadoras: {ex.Message}");
-        }
+        _transportadoras = await TransportadoraService.ListarAsync();
     }
 
-    private void Nova()
+    private void Novo()
     {
-        Navigation.NavigateTo("/cadastros/transportadoras/nova");
+        // Navegar para página de criação
+        // NavigationManager.NavigateTo("/cadastros/transportadoras/nova");
+        Snackbar.Add("Funcionalidade de criação ainda não implementada.", Severity.Info);
     }
 
     private void Editar(Guid id)
     {
-        Navigation.NavigateTo($"/cadastros/transportadoras/{id}");
+        // Navegar para página de edição
+        // NavigationManager.NavigateTo($"/cadastros/transportadoras/editar/{id}");
+        Snackbar.Add("Funcionalidade de edição ainda não implementada.", Severity.Info);
     }
 
-    private void ConfirmarExcluir(Transportadora transportadora)
+    private async Task Excluir(Guid id)
     {
-        _selecionada = transportadora;
-        _confirmarExclusao = true;
-    }
-
-    private async Task Excluir()
-    {
-        if (_selecionada is not null)
+        var transportadora = _transportadoras.FirstOrDefault(t => t.Id == id);
+        if (transportadora is null)
         {
-            try
+            Snackbar.Add("Transportadora não encontrada.", Severity.Error);
+            return;
+        }
+
+        var result = await DialogService.ShowMessageBox(
+            "Confirmação",
+            $"Deseja realmente excluir a transportadora '{transportadora.Nome}'?",
+            yesText: "Sim",
+            noText: "Não"
+        );
+
+        if (result == true)
+        {
+            var sucesso = await TransportadoraService.RemoverAsync(id);
+            if (sucesso)
             {
-                await Http.DeleteAsync($"api/transportadora/{_selecionada.Id}");
+                Snackbar.Add("Transportadora excluída com sucesso.", Severity.Success);
                 await CarregarTransportadoras();
             }
-            catch (Exception ex)
+            else
             {
-                Console.Error.WriteLine($"Erro ao excluir transportadora: {ex.Message}");
-            }
-            finally
-            {
-                _confirmarExclusao = false;
+                Snackbar.Add("Erro ao excluir transportadora.", Severity.Error);
             }
         }
     }

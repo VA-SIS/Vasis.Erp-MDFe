@@ -12,6 +12,7 @@ public class AppDbContext : DbContext
 
     public DbSet<Empresa> Empresas => Set<Empresa>();
     public DbSet<Pessoa> Pessoas => Set<Pessoa>();
+    public DbSet<Transportadora> Transportadoras => Set<Transportadora>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,6 +21,8 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new TransportadoraMap());
         modelBuilder.ApplyConfiguration(new VeiculoMap());
         modelBuilder.ApplyConfiguration(new MotoristaMap());
+
+
 
         base.OnModelCreating(modelBuilder);
     }

@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Vasis.Erp.Facil.Services;
-using Vasis.Erp.Facil.Shared.Entities.Cadastro;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Vasis.Erp.Facil.Application.DTOs.Empresa;
+using Vasis.Erp.Facil.Application.Interfaces;
 
 namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class EmpresaController : ControllerBase
 {
     private readonly IEmpresaService _empresaService;
@@ -16,31 +18,35 @@ public class EmpresaController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Empresa>>> Get() =>
-        Ok(await _empresaService.ListarAsync());
+    public async Task<IActionResult> Get() =>
+        Ok(await _empresaService.ObterTodosAsync());
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Empresa?>> Get(Guid id)
+    public async Task<IActionResult> GetById(Guid id)
     {
-        var result = await _empresaService.ObterPorIdAsync(id);
-        return result is null ? NotFound() : Ok(result);
+        var empresa = await _empresaService.ObterPorIdAsync(id);
+        return empresa == null ? NotFound() : Ok(empresa);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Empresa>> Post([FromBody] Empresa empresa) =>
-        Ok(await _empresaService.CriarAsync(empresa));
+    public async Task<IActionResult> Post([FromBody] EmpresaCreateDto dto)
+    {
+        var novaEmpresa = await _empresaService.AdicionarAsync(dto);
+        return CreatedAtAction(nameof(GetById), new { id = novaEmpresa.Id }, novaEmpresa);
+    }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<Empresa>> Put(Guid id, [FromBody] Empresa empresa)
+    public async Task<IActionResult> Put(Guid id, [FromBody] EmpresaUpdateDto dto)
     {
-        if (id != empresa.Id) return BadRequest();
-        return Ok(await _empresaService.AtualizarAsync(empresa));
+        if (id != dto.Id) return BadRequest();
+        await _empresaService.AtualizarAsync(dto);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        var sucesso = await _empresaService.RemoverAsync(id);
-        return sucesso ? Ok() : NotFound();
+        await _empresaService.RemoverAsync(id);
+        return NoContent();
     }
 }

@@ -3,12 +3,17 @@ using Vasis.Erp.Facil.Server.Components;
 using Microsoft.EntityFrameworkCore;
 using Vasis.Erp.Facil.Services.Cadastros;
 using Vasis.Erp.Facil.Services;
-using Microsoft.AspNetCore.Builder;
+using Vasis.Erp.Facil.Server.Interfaces.Cadastros;
+using Vasis.Erp.Facil.Server.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddAutoMapper(typeof(EmpresaProfile)); // AutoMapper
+
+builder.Services.AddScoped<IEmpresaService, EmpresaService>(); // Injeção do serviço
 
 
 // Add services to the container.
@@ -18,11 +23,19 @@ builder.Services.AddRazorComponents()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<EmpresaService>();
-builder.Services.AddScoped<PessoaService>();
-builder.Services.AddScoped<TransportadoraService>();
-builder.Services.AddScoped<VeiculoService>();
-builder.Services.AddScoped<MotoristaService>();
+//builder.Services.AddScoped<EmpresaService>();
+//builder.Services.AddScoped<PessoaService>();
+//builder.Services.AddScoped<TransportadoraService>();
+//builder.Services.AddScoped<VeiculoService>();
+//builder.Services.AddScoped<MotoristaService>();
+
+builder.Services.AddScoped<IVeiculoService, VeiculoService>();
+builder.Services.AddScoped<IMotoristaService, MotoristaService>();
+builder.Services.AddScoped<IVeiculoService, VeiculoService>();
+builder.Services.AddScoped<IPessoaService, PessoaService>();
+b
+
+builder.Services.AddScoped<ITransportadoraService, TransportadoraService>();
 
 
 var app = builder.Build();
