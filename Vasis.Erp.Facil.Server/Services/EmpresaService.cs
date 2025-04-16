@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Vasis.Erp.Facil.Application.Interfaces.Cadastros;
 using Vasis.Erp.Facil.Data;
-using Vasis.Erp.Facil.Server.Data;
-using Vasis.Erp.Facil.Server.DTOs.Cadastros;
-using Vasis.Erp.Facil.Server.Interfaces.Cadastros;
+using Vasis.Erp.Facil.Shared.Dtos.Cadastros;
 using Vasis.Erp.Facil.Shared.Entities.Cadastro;
 
 namespace Vasis.Erp.Facil.Server.Services.Cadastros;
@@ -69,5 +68,25 @@ public class EmpresaService : IEmpresaService
         await _context.SaveChangesAsync();
 
         return true;
+    }
+
+    public Task<EmpresaDto?> ObterAsync(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task CriarAsync(EmpresaDto empresa)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task IEmpresaService.AtualizarAsync(EmpresaDto empresa)
+    {
+        return AtualizarAsync(empresa);
+    }
+
+    Task IEmpresaService.RemoverAsync(Guid id)
+    {
+        return RemoverAsync(id);
     }
 }

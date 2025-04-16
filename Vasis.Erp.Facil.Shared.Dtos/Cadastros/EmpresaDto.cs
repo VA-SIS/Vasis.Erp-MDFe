@@ -1,4 +1,4 @@
-﻿namespace Vasis.Erp.Facil.Server.DTOs.Cadastros;
+﻿namespace Vasis.Erp.Facil.Shared.Dtos.Cadastros;
 
 public class EmpresaDto
 {
@@ -21,3 +21,4 @@ public class EmpresaDto
     public DateTime CriadoEm { get; set; }
     public DateTime AtualizadoEm { get; set; }
 }
+

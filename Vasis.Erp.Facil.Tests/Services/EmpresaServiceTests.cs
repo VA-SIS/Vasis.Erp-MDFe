@@ -2,9 +2,9 @@
 using Vasis.Erp.Facil.Data;
 using Vasis.Erp.Facil.Shared.Entities.Cadastro;
 using FluentValidation;
-using Vasis.Erp.Facil.Services.Cadastros;
 using Vasis.Erp.Facil.Shared.Validators.Cadastros;
 using Vasis.Erp.Facil.Data.Repositories;
+using Vasis.Erp.Facil.Services.Cadastros;
 
 namespace Vasis.Erp.Facil.Tests.Services
 {

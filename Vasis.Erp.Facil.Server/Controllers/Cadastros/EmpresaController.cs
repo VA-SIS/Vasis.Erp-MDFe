@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Vasis.Erp.Facil.Application.DTOs.Empresa;
-using Vasis.Erp.Facil.Application.Interfaces;
+using Vasis.Erp.Facil.Application.Interfaces.Cadastros;
 
 namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 

@@ -8,6 +8,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Vasis.Erp.Facil.Shared.Dtos\Vasis.Erp.Facil.Shared.Dtos.csproj" />
     <ProjectReference Include="..\Vasis.Erp.Facil.Assembly.Client\Vasis.Erp.Facil.Assembly.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.*" />
   </ItemGroup>

@@ -1,6 +1,5 @@
-﻿using System;
+﻿namespace Vasis.Erp.Facil.Shared.Dtos.Cadastros;
 
-namespace Vasis.Erp.Facil.Shared.Dtos.Cadastros;
 
 public class TransportadoraDto
 {

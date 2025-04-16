@@ -8,7 +8,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vasis.Erp.Facil.Shared.Dtos\Vasis.Erp.Facil.Shared.Dtos.csproj" />
-    <ProjectReference Include="Vasis.Erp.Facil.Application.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Ioc\" />
   </ItemGroup>
 
 </Project>

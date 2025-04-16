@@ -2,9 +2,10 @@
 using Vasis.Erp.Facil.Data.Repositories;
 using Vasis.Erp.Facil.Shared.Entities.Cadastro;
 
+
 namespace Vasis.Erp.Facil.Services.Cadastros;
 
-public class EmpresaService : IEmpresaService
+public class EmpresaService 
 {
     private readonly IEmpresaRepository _repository;
     private readonly IValidator<Empresa> _validator;

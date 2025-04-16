@@ -19,14 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vasis.Erp.Facil.Application.Interfaces\Vasis.Erp.Facil.Application.csproj" />
-    <ProjectReference Include="..\Vasis.Erp.Facil.Data\Vasis.Erp.Facil.Data.csproj" />
-    <ProjectReference Include="..\Vasis.Erp.Facil.Services\Vasis.Erp.Facil.Services.csproj" />
-    <ProjectReference Include="..\Vasis.Erp.Facil.Shared\Vasis.Erp.Facil.Shared.csproj" />
+    <Folder Include="Validators\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Validators\" />
+    <ProjectReference Include="..\Vasis.Erp.Facil.Application.Interfaces\Vasis.Erp.Facil.Application.csproj" />
   </ItemGroup>
 
 </Project>

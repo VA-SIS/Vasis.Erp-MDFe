@@ -1,8 +1,9 @@
-﻿@page "/cadastros/transportadoras"
+﻿@* @page "/cadastros/transportadoras"
 
-@inject ITransportadoraService TransportadoraService
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
+@inject ITransportadoraService TransportadoraService
+@inject NavigationManager NavigationManager
 
 <PageTitle>Transportadoras</PageTitle>
 
@@ -50,16 +51,14 @@
 
     private void Novo()
     {
-        // Navegar para página de criação
-        // NavigationManager.NavigateTo("/cadastros/transportadoras/nova");
         Snackbar.Add("Funcionalidade de criação ainda não implementada.", Severity.Info);
+        // NavigationManager.NavigateTo("/cadastros/transportadoras/nova");
     }
 
     private void Editar(Guid id)
     {
-        // Navegar para página de edição
-        // NavigationManager.NavigateTo($"/cadastros/transportadoras/editar/{id}");
         Snackbar.Add("Funcionalidade de edição ainda não implementada.", Severity.Info);
+        // NavigationManager.NavigateTo($"/cadastros/transportadoras/editar/{id}");
     }
 
     private async Task Excluir(Guid id)
@@ -93,3 +92,4 @@
         }
     }
 }
+ *@

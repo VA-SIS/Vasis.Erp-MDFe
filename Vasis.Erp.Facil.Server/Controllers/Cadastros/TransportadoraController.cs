@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Vasis.Erp.Facil.Application.Interfaces.Services;
-using Vasis.Erp.Facil.Shared.Entities.Cadastros;
+using Vasis.Erp.Facil.Application.Interfaces.Cadastros;
 
 namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 

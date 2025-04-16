@@ -13,7 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddAutoMapper(typeof(EmpresaProfile)); // AutoMapper
 
-builder.Services.AddScoped<IEmpresaService, EmpresaService>(); // Injeção do serviço
+//builder.Services.AddScoped<IEmpresaService, EmpresaService>(); // Injeção do serviço
 
 
 // Add services to the container.
@@ -29,13 +29,11 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddScoped<VeiculoService>();
 //builder.Services.AddScoped<MotoristaService>();
 
-builder.Services.AddScoped<IVeiculoService, VeiculoService>();
-builder.Services.AddScoped<IMotoristaService, MotoristaService>();
-builder.Services.AddScoped<IVeiculoService, VeiculoService>();
-builder.Services.AddScoped<IPessoaService, PessoaService>();
-b
-
-builder.Services.AddScoped<ITransportadoraService, TransportadoraService>();
+//builder.Services.AddScoped<IVeiculoService, VeiculoService>();
+//builder.Services.AddScoped<IMotoristaService, MotoristaService>();
+//builder.Services.AddScoped<IVeiculoService, VeiculoService>();
+//builder.Services.AddScoped<IPessoaService, PessoaService>();
+//builder.Services.AddScoped<ITransportadoraService, TransportadoraService>();
 
 
 var app = builder.Build();
