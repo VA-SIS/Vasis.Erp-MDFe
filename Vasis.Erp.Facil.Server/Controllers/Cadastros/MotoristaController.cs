@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Vasis.Erp.Facil.Application.Interfaces.Services;
+using Vasis.Erp.Facil.Services;
 using Vasis.Erp.Facil.Shared.Entities.Cadastros;
 
 namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
@@ -8,7 +8,7 @@ namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 [Route("api/[controller]")]
 public class MotoristaController : ControllerBase
 {
-    private readonly IMotoristaService _motoristaService;
+    private readonly MotoristaService _motoristaService;
 
     public MotoristaController(IMotoristaService motoristaService)
     {
