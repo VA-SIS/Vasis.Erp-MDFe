@@ -2,7 +2,7 @@
 using Vasis.Erp.Facil.Shared.Dtos.Cadastros;
 using Vasis.Erp.Facil.Shared.Entities.Cadastro;
 
-namespace Vasis.Erp.Facil.Server.Mappings;
+namespace Vasis.Erp.Facil.Shared.Dtos.Profiles;
 
 public class EmpresaProfile : Profile
 {

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include=".Mappings\EmpresaMap.cs" />
+    <Compile Include=".Mappings\MotoristaMap.cs" />
+    <Compile Include=".Mappings\PessoaMap.cs" />
+    <Compile Include=".Mappings\TransportadoraMap.cs" />
+    <Compile Include=".Mappings\VeiculoMap.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vasis.Erp.Facil.Shared\Vasis.Erp.Facil.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

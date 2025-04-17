@@ -10,6 +10,7 @@ public interface ITransportadoraService
     Task AdicionarAsync(TransportadoraDto transportadora);
     Task AtualizarAsync(TransportadoraDto transportadora);
     Task ExcluirAsync(Guid id);
+    Task ObterPorIdAsync(Guid id);
 }
 
 
