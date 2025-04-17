@@ -20,8 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Assembly", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Assembly.Client", "Vasis.Erp.Facil.Assembly\Vasis.Erp.Facil.Assembly.Client\Vasis.Erp.Facil.Assembly.Client.csproj", "{F82161E8-3FE4-4805-BCCE-89934E723292}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Data", "Vasis.Erp.Facil.Data\Vasis.Erp.Facil.Data.csproj", "{483C71AF-783B-428E-83B3-9C4A79291ED0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Services", "Vasis.Erp.Facil.Services\Vasis.Erp.Facil.Services.csproj", "{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Integracoes.ZeusMdfe", "Vasis.Erp.Facil.Integracoes.ZeusMdfe\Vasis.Erp.Facil.Integracoes.ZeusMdfe.csproj", "{28B61A55-AEEC-4372-86E1-C81A89FC8AD3}"
@@ -30,13 +28,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Shared", "V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Tests", "Vasis.Erp.Facil.Tests\Vasis.Erp.Facil.Tests.csproj", "{49720E78-2136-4424-956B-47322AF0241D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Application", "Vasis.Erp.Facil.Application.Interfaces\Vasis.Erp.Facil.Application.csproj", "{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Shared.Dtos", "Vasis.Erp.Facil.Shared.Dtos\Vasis.Erp.Facil.Shared.Dtos.csproj", "{1B0AB99A-CEE4-406D-A7CB-43A1C90C07F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Infra", "Vasis.Erp.Facil.Infra\Vasis.Erp.Facil.Infra.csproj", "{86048E8F-F0EA-4FC1-B86E-DCF2F4F3D0C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Infrastructure.Persistence", "Vasis.Erp.Facil.Infrastructure.Persistence\Vasis.Erp.Facil.Infrastructure.Persistence.csproj", "{9C41989E-6F9E-4334-8722-30BA29604BF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Application.Interfaces", "Vasis.Erp.Facil.Application.Interfaces\Vasis.Erp.Facil.Application.Interfaces.csproj", "{8A427172-0CF0-492D-A4D3-7F577A5B5059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Domain.Interfaces.Repositories", "Vasis.Erp.Facil.Domain.Interfaces.Repositories\Vasis.Erp.Facil.Domain.Interfaces.Repositories.csproj", "{ADC0A6A0-A1EC-4974-B6E2-11347E725BAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vasis.Erp.Facil.Infra.Data", "Vasis.Erp.Facil.Infra.Data\Vasis.Erp.Facil.Infra.Data.csproj", "{731D65E2-0545-41A5-B8BB-1DCB6DE0C40F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,10 +58,6 @@ Global
 		{F82161E8-3FE4-4805-BCCE-89934E723292}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F82161E8-3FE4-4805-BCCE-89934E723292}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F82161E8-3FE4-4805-BCCE-89934E723292}.Release|Any CPU.Build.0 = Release|Any CPU
-		{483C71AF-783B-428E-83B3-9C4A79291ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{483C71AF-783B-428E-83B3-9C4A79291ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{483C71AF-783B-428E-83B3-9C4A79291ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{483C71AF-783B-428E-83B3-9C4A79291ED0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,10 +74,6 @@ Global
 		{49720E78-2136-4424-956B-47322AF0241D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49720E78-2136-4424-956B-47322AF0241D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49720E78-2136-4424-956B-47322AF0241D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EB90C35-7577-4CC7-BF5F-251CD51B84DD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1B0AB99A-CEE4-406D-A7CB-43A1C90C07F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1B0AB99A-CEE4-406D-A7CB-43A1C90C07F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B0AB99A-CEE4-406D-A7CB-43A1C90C07F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -92,6 +86,18 @@ Global
 		{9C41989E-6F9E-4334-8722-30BA29604BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C41989E-6F9E-4334-8722-30BA29604BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C41989E-6F9E-4334-8722-30BA29604BF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A427172-0CF0-492D-A4D3-7F577A5B5059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A427172-0CF0-492D-A4D3-7F577A5B5059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A427172-0CF0-492D-A4D3-7F577A5B5059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A427172-0CF0-492D-A4D3-7F577A5B5059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC0A6A0-A1EC-4974-B6E2-11347E725BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC0A6A0-A1EC-4974-B6E2-11347E725BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC0A6A0-A1EC-4974-B6E2-11347E725BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC0A6A0-A1EC-4974-B6E2-11347E725BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{731D65E2-0545-41A5-B8BB-1DCB6DE0C40F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{731D65E2-0545-41A5-B8BB-1DCB6DE0C40F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{731D65E2-0545-41A5-B8BB-1DCB6DE0C40F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{731D65E2-0545-41A5-B8BB-1DCB6DE0C40F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,15 +106,16 @@ Global
 		{DA0D1C47-11F4-479C-8FB4-03CA08619ACE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{191681C5-ABA5-40C6-8438-D6804AC9E4B1} = {29A301F3-D781-4D6F-81F0-03C28AF7BA2B}
 		{F82161E8-3FE4-4805-BCCE-89934E723292} = {29A301F3-D781-4D6F-81F0-03C28AF7BA2B}
-		{483C71AF-783B-428E-83B3-9C4A79291ED0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{49D98FD5-14D6-4955-9DA8-2BB1E146C8BA} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{28B61A55-AEEC-4372-86E1-C81A89FC8AD3} = {5F6B4FBC-5AE0-43F4-B85A-BA98CA129765}
 		{E73E40ED-2429-4616-8C0D-B4C56F5C7A2D} = {95409D6E-E0DA-4CF7-874E-B60F893FDA4F}
 		{49720E78-2136-4424-956B-47322AF0241D} = {D97A3647-D5D5-4937-91BF-8C7FE0AF82DC}
-		{3EB90C35-7577-4CC7-BF5F-251CD51B84DD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{1B0AB99A-CEE4-406D-A7CB-43A1C90C07F4} = {95409D6E-E0DA-4CF7-874E-B60F893FDA4F}
 		{86048E8F-F0EA-4FC1-B86E-DCF2F4F3D0C5} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{9C41989E-6F9E-4334-8722-30BA29604BF1} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{8A427172-0CF0-492D-A4D3-7F577A5B5059} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{ADC0A6A0-A1EC-4974-B6E2-11347E725BAE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{731D65E2-0545-41A5-B8BB-1DCB6DE0C40F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {49D8D1F7-6DFD-45AA-8701-3DE45CA8E07B}

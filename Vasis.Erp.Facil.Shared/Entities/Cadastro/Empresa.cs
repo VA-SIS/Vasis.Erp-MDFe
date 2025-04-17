@@ -1,28 +1,25 @@
-﻿using Vasis.Erp.Facil.Shared.Entities.Cadastros;
-
-namespace Vasis.Erp.Facil.Shared.Entities.Cadastro;
-
+﻿namespace Vasis.Erp.Facil.Shared.Entities.Cadastros;
 public class Empresa
 {
     public Guid Id { get; set; }
-    public string RazaoSocial { get; set; } = null!;
-    public string NomeFantasia { get; set; } = null!;
-    public string Cnpj { get; set; } = null!;
-    public string InscricaoEstadual { get; set; } = string.Empty;
-    public string InscricaoMunicipal { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public string Telefone { get; set; } = string.Empty;
-    public string Cep { get; set; } = string.Empty;
-    public string Endereco { get; set; } = string.Empty;
-    public string Numero { get; set; } = string.Empty;
-    public string Complemento { get; set; } = string.Empty;
-    public string Bairro { get; set; } = string.Empty;
-    public string Cidade { get; set; } = string.Empty;
-    public string Estado { get; set; } = string.Empty;
-    public bool Ativa { get; set; } = true;
-    public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
+    public string RazaoSocial { get; set; } = string.Empty;
+    public string? NomeFantasia { get; set; }
+    public string? Cnpj { get; set; }
+    public string? Ie { get; set; }
 
-    public ICollection<Pessoa>? Pessoas { get; set; }
-    public DateTime CriadoEm { get; set; }
-    public DateTime AtualizadoEm { get; set; }
+    public string? Email { get; set; }
+    public string? Telefone { get; set; }
+
+    public string? Cep { get; set; }
+    public string? Endereco { get; set; }
+    public string? Numero { get; set; }
+    public string? Bairro { get; set; }
+    public string? Complemento { get; set; }
+    public string? Cidade { get; set; }
+    public string? Uf { get; set; }
+
+    public ICollection<Pessoa> Pessoas { get; set; } = new List<Pessoa>();
+
+    public DateTime CriadoEm { get; set; } = DateTime.UtcNow;
+    public DateTime? AtualizadoEm { get; set; }
 }

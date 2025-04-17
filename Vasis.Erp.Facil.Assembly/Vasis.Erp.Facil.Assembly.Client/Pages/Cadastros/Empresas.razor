@@ -1,0 +1,95 @@
+﻿@page "/cadastros/empresas"
+@using Vasis.Erp.Facil.Application.Dtos.Cadastros
+@inject EmpresaApiService EmpresaService
+@inject ISnackbar Snackbar
+
+<MudPaper Class="p-4">
+    <MudText Typo="Typo.h5">Cadastro de Empresas</MudText>
+    <MudDivider Class="my-2" />
+    <MudButton Color="Color.Primary" OnClick="Adicionar">Nova Empresa</MudButton>
+
+    <MudTable Items="_empresas" Hover="true" Dense="true" Class="mt-4">
+        <HeaderContent>
+            <MudTh>Razão Social</MudTh>
+            <MudTh>CNPJ</MudTh>
+            <MudTh>Email</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.RazaoSocial</MudTd>
+            <MudTd>@context.Cnpj</MudTd>
+            <MudTd>@context.Email</MudTd>
+            <MudTd>
+                <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="@(() => Editar(context))" />
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => Remover(context.Id))" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudPaper>
+
+<MudDialog @bind-IsVisible="_dialogOpen">
+    <DialogContent>
+        <MudText Typo="Typo.h6">@(_empresa.Id == Guid.Empty ? "Nova Empresa" : "Editar Empresa")</MudText>
+
+        <MudTextField Label="Razão Social" @bind-Value="_empresa.RazaoSocial" Required="true" />
+        <MudTextField Label="CNPJ" @bind-Value="_empresa.Cnpj" />
+        <MudTextField Label="Email" @bind-Value="_empresa.Email" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary" OnClick="Salvar">Salvar</MudButton>
+        <MudButton OnClick="() => _dialogOpen = false">Cancelar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    private List<EmpresaDto> _empresas = new();
+    private EmpresaDto _empresa = new();
+    private bool _dialogOpen = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Carregar();
+    }
+
+    private async Task Carregar()
+    {
+        _empresas = (await EmpresaService.GetAllAsync()).ToList();
+    }
+
+    private void Adicionar()
+    {
+        _empresa = new EmpresaDto();
+        _dialogOpen = true;
+    }
+
+    private void Editar(EmpresaDto empresa)
+    {
+        _empresa = new EmpresaDto
+            {
+                Id = empresa.Id,
+                RazaoSocial = empresa.RazaoSocial,
+                Cnpj = empresa.Cnpj,
+                Email = empresa.Email
+            };
+        _dialogOpen = true;
+    }
+
+    private async Task Salvar()
+    {
+        if (_empresa.Id == Guid.Empty)
+            await EmpresaService.CreateAsync(_empresa);
+        else
+            await EmpresaService.UpdateAsync(_empresa);
+
+        _dialogOpen = false;
+        await Carregar();
+        Snackbar.Add("Empresa salva com sucesso", Severity.Success);
+    }
+
+    private async Task Remover(Guid id)
+    {
+        await EmpresaService.DeleteAsync(id);
+        await Carregar();
+        Snackbar.Add("Empresa removida", Severity.Warning);
+    }
+}

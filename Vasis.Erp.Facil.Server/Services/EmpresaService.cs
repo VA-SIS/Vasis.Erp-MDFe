@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Vasis.Erp.Facil.Application.Interfaces.Cadastros;
-using Vasis.Erp.Facil.Data;
-using Vasis.Erp.Facil.Shared.Dtos.Cadastros;
-using Vasis.Erp.Facil.Shared.Entities.Cadastro;
+using System;
+using Vasis.Erp.Facil.Application.Dtos.Cadastros;
+using Vasis.Erp.Facil.Services.Cadastros;
+using Vasis.Erp.Facil.Shared.Entities.Cadastros;
 
 namespace Vasis.Erp.Facil.Server.Services.Cadastros;
 
-public class EmpresaService : IEmpresaService
+public class EmpresaService : EmpresaService
 {
-    private readonly AppDbContext _context;
+    private readonly AppContext _context;
     private readonly IMapper _mapper;
 
     public EmpresaService(AppDbContext context, IMapper mapper)

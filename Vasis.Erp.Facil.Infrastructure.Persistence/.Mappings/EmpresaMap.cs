@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Vasis.Erp.Facil.Shared.Entities.Cadastro;
 
 namespace Vasis.Erp.Facil.Infrastructure.Persistence.Mappings;
 

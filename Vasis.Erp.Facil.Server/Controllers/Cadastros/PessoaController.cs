@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Vasis.Erp.Facil.Application.Interfaces.Services;
-using Vasis.Erp.Facil.Shared.Entities.Cadastros;
+using Vasis.Erp.Facil.Application.Interfaces.Services.Cadastros;
+using Vasis.Erp.Facil.Shared.Dtos.Cadastros;
 
 namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 
@@ -8,39 +8,45 @@ namespace Vasis.Erp.Facil.Server.Controllers.Cadastros;
 [Route("api/[controller]")]
 public class PessoaController : ControllerBase
 {
-    private readonly IPessoaService _pessoaService;
+    private readonly IPessoaAppService _appService;
 
-    public PessoaController(IPessoaService pessoaService)
+    public PessoaController(IPessoaAppService appService)
     {
-        _pessoaService = pessoaService;
+        _appService = appService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Pessoa>>> Get() =>
-        Ok(await _pessoaService.ListarAsync());
+    public async Task<IActionResult> GetAll()
+    {
+        var result = await _appService.GetAllAsync();
+        return Ok(result);
+    }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Pessoa?>> Get(Guid id)
+    public async Task<IActionResult> GetById(Guid id)
     {
-        var result = await _pessoaService.ObterPorIdAsync(id);
-        return result is null ? NotFound() : Ok(result);
+        var result = await _appService.GetByIdAsync(id);
+        return result == null ? NotFound() : Ok(result);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Pessoa>> Post([FromBody] Pessoa pessoa) =>
-        Ok(await _pessoaService.CriarAsync(pessoa));
+    public async Task<IActionResult> Create(PessoaDto dto)
+    {
+        var result = await _appService.CreateAsync(dto);
+        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+    }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<Pessoa>> Put(Guid id, [FromBody] Pessoa pessoa)
+    public async Task<IActionResult> Update(Guid id, PessoaDto dto)
     {
-        if (id != pessoa.Id) return BadRequest();
-        return Ok(await _pessoaService.AtualizarAsync(pessoa));
+        var result = await _appService.UpdateAsync(id, dto);
+        return Ok(result);
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        var sucesso = await _pessoaService.RemoverAsync(id);
-        return sucesso ? Ok() : NotFound();
+        var success = await _appService.DeleteAsync(id);
+        return success ? NoContent() : NotFound();
     }
 }

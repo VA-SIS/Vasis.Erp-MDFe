@@ -1,15 +1,12 @@
-﻿using Vasis.Erp.Facil.Shared.Entities.Cadastro;
-
-namespace Vasis.Erp.Facil.Shared.Entities.Cadastros;
+﻿namespace Vasis.Erp.Facil.Shared.Entities.Cadastros;
 
 public class Pessoa
 {
     public Guid Id { get; set; }
     public string Nome { get; set; } = string.Empty;
-    public string? NomeFantasia { get; set; }
     public string? CpfCnpj { get; set; }
     public string? RgIe { get; set; }
-    public string? TipoPessoa { get; set; } // F = Física, J = Jurídica
+    public string? TipoPessoa { get; set; } // F ou J
     public string? Email { get; set; }
     public string? Telefone { get; set; }
 

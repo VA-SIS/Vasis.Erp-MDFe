@@ -2,11 +2,11 @@
 using Vasis.Erp.Facil.Server.Mappings;
 using Vasis.Erp.Facil.Shared.Entities.Cadastros;
 
-namespace Vasis.Erp.Facil.Server.Data;
+namespace Vasis.Erp.Facil.Infra.Data;
 
-public class ApplicationDbContext : DbContext
+public class AppDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options) { }
 
     public DbSet<Empresa> Empresas { get; set; }
@@ -16,7 +16,7 @@ public class ApplicationDbContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new EmpresaMapping());
         modelBuilder.ApplyConfiguration(new PessoaMapping());
-
+       
         base.OnModelCreating(modelBuilder);
     }
 }

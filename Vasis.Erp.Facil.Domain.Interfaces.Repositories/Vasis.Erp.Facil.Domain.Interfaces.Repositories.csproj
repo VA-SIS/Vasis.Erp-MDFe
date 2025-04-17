@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.11.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Vasis.Erp.Facil.Application.Interfaces\Vasis.Erp.Facil.Application.Interfaces.csproj" />
     <ProjectReference Include="..\Vasis.Erp.Facil.Shared.Dtos\Vasis.Erp.Facil.Shared.Dtos.csproj" />
     <ProjectReference Include="..\Vasis.Erp.Facil.Shared\Vasis.Erp.Facil.Shared.csproj" />
   </ItemGroup>
